@@ -1,8 +1,11 @@
 cmake_minimum_required (VERSION 3.1) 
-set (CMAKE_C_STANDARD 11)
+set (CMAKE_C_STANDARD 14)
 project (physic_xia)
 
 include_directories ("${PROJECT_SOURCE_DIR}/base")
+include_directories ("${PROJECT_SOURCE_DIR}/../bgfx/include")
+include_directories ("${PROJECT_SOURCE_DIR}/../bimg/include")
+include_directories ("${PROJECT_SOURCE_DIR}/../bx/include")
 #add_subdirectory (base)
 #include_directories ("${PROJECT_SOURCE_DIR}/cal")
 #add_subdirectory (cal)
