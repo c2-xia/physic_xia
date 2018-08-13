@@ -1,0 +1,11 @@
+
+
+struct DrawAble
+{
+
+};
+
+void renderTest()
+{
+
+}
