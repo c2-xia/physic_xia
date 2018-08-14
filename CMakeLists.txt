@@ -14,6 +14,7 @@ include_directories ("${PROJECT_SOURCE_DIR}/../bx/include")
 
 add_executable(physic_xia
 ./base/Node.cpp
+./base/BoxNode.cpp
 main.cpp
 )
  
