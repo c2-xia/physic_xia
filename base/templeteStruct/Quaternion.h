@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef QUATERNION_H
+#define QUATERNION_H
 
 class Quaternionf
 {

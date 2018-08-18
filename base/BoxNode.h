@@ -3,7 +3,7 @@
 
 #include "Node.h"
 
-struct BOX_NODE_H:public Node
+struct BOX_NODE:public Node
 {
 
 };

@@ -10,7 +10,7 @@ struct Vector3
 	T* getPtr(){ return &x;}
 	T operator [](unsigned char index)
 	{
-		if(index >=0&& index<3)
+		if(index >=0 && index<3)
 			return getPtr()[index];
 		return 0;
 	}
