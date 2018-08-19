@@ -5,8 +5,8 @@
 
 struct Node
 {
-	Vector3f _pos;
-	Quaternionf _quat;
+	Vector3R _pos;
+	QuaternionR _quat;
 };
 
 #endif

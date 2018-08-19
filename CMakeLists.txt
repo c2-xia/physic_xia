@@ -35,6 +35,8 @@ add_executable(physic_xia
 ./base/Node.cpp
 ./base/BoxNode.cpp
 ./render/cube/cubes.cpp
+./render/NodeRender.cpp
+./render/NodePushHelper.cpp
 main.cpp
 )
  

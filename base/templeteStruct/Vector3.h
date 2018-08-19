@@ -4,9 +4,10 @@
 template<typename T>
 struct Vector3
 {
-	T x;
-	T y;
-	T z;
+	 
+	Vector3():x(0),y(0),z(0){}
+		 
+	Vector3(T xx, T yy, T zz) :x(xx), y(yy), z(zz) {}
 	T* getPtr(){ return &x;}
 	T operator [](unsigned char index)
 	{
@@ -14,9 +15,12 @@ struct Vector3
 			return getPtr()[index];
 		return 0;
 	}
+	T x;
+	T y;
+	T z;
 };
 
 typedef Vector3<float> Vector3f;
-
+typedef Vector3<real> Vector3R;
 #endif
 

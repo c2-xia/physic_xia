@@ -1,10 +1,16 @@
 #ifndef QUATERNION_H
 #define QUATERNION_H
 
-class Quaternionf
+
+
+class QuaternionR
 {
 public:
-	float x, y, z, w;
+	QuaternionR():x(0), y(0), z(0), w(1)
+	{
+
+	}
+	real  x, y, z, w;
 };
 
 #endif
