@@ -1,6 +1,7 @@
 #ifndef PLANE_H
 #define PLANE_H
- 
+
+#include "matrix.h"
 
 struct Plane 
 {
@@ -9,11 +10,11 @@ struct Plane
 
 	void matrixR(real* pMatrix)
 	{
-
-		QuaternionToMatrix(q, pMatrix);
-		pMatrix[12] = pos[0];
-		pMatrix[13] = pos[1];
-		pMatrix[14] = pos[2];
+		
+		fromToRotation(Vector3R::Up().getPtr(),_up.getPtr(), pMatrix);
+		pMatrix[12] = _center[0];
+		pMatrix[13] = _center[1];
+		pMatrix[14] = _center[2];
 	}
 };
 

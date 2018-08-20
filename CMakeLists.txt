@@ -1,5 +1,8 @@
 cmake_minimum_required (VERSION 3.1) 
 set (CMAKE_CPP_STANDARD 15)
+set (CMAKE_C_STANDARD 15)
+set(CMAKE_CXX_FLAGS_RELEASE "/MT")
+set(CMAKE_CXX_FLAGS_DEBUG "/MTd")
 project (physic_xia)
 
 include_directories ("${PROJECT_SOURCE_DIR}/base")
@@ -25,6 +28,10 @@ example-commonDebug
 example-glueDebug
 psapi
 )
+
+ADD_DEFINITIONS(-D_XKEYCHECK_H
+-D_HAS_ITERATOR_DEBUGGING=0
+)
 #add_subdirectory (base)
 #include_directories ("${PROJECT_SOURCE_DIR}/cal")
 #add_subdirectory (cal)
@@ -34,6 +41,7 @@ psapi
 add_executable(physic_xia
 ./base/Node.cpp
 ./base/BoxNode.cpp
+./base/matrix.cpp
 ./render/cube/cubes.cpp
 ./render/NodeRender.cpp
 ./render/NodePushHelper.cpp

@@ -23,4 +23,3 @@ struct IRenderAble
 		bool m_b = true,
 		bool m_a = true); 
 };
-extern std::list<IRenderAble> g_RenderAbles;

@@ -1,16 +1,19 @@
+ 
 /*
  * Copyright 2011-2018 Branimir Karadzic. All rights reserved.
  * License: https://github.com/bkaradzic/bgfx#license-bsd-2-clause
  */
 
-#define constexpr const
 #include "common.h"
 #include "bgfx_utils.h"
 #include "imgui/imgui.h"
+
+
 #include "../NodeRender.h"
+#include <list>
 
 extern void RenderLoop(bgfx::ProgramHandle& m_program);
-
+extern std::list<IRenderAble> g_RenderAbles;
 namespace
 {
 

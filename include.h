@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "base/base.h"
-#include "base/QuaternionHelper.h"
 #include "base/templeteStruct/templeteInclude.h"
 #include "base/Plane.h"
 #include "base/BoxNode.h"
