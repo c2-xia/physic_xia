@@ -17,7 +17,7 @@ struct Vector3
 	}
 	static const Vector3& Up()
 	{
-		const Vector3 up_instance(0, 1, 0);
+		const static Vector3 up_instance(0, 1, 0);
 		return up_instance;
 	}
 

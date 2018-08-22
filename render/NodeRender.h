@@ -1,4 +1,7 @@
-//#define ENTRY_CONFIG_IMPLEMENT_MAIN 0
+#ifndef NODE_RENDER_H
+#define NODE_RENDER_H
+
+
 #include <bx/macros.h>
 #include "bgfx_utils.h"
 namespace entry
@@ -23,3 +26,5 @@ struct IRenderAble
 		bool m_b = true,
 		bool m_a = true); 
 };
+
+#endif

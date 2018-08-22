@@ -8,35 +8,17 @@
 #include "bgfx_utils.h"
 #include "imgui/imgui.h"
 
-
+#include "../include.h"
 #include "../NodeRender.h"
+#include "../NodePushHelper.h"
 #include <list>
 
-extern void RenderLoop(bgfx::ProgramHandle& m_program);
+void RenderLoop(bgfx::ProgramHandle& m_program);
 extern std::list<IRenderAble> g_RenderAbles;
+bgfx::VertexDecl PosColorVertex::ms_decl;
 namespace
 {
-
-struct PosColorVertex
-{
-	float m_x;
-	float m_y;
-	float m_z;
-	uint32_t m_abgr;
-
-	static void init()
-	{
-		ms_decl
-			.begin()
-			.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
-			.add(bgfx::Attrib::Color0,   4, bgfx::AttribType::Uint8, true)
-			.end();
-	};
-
-	static bgfx::VertexDecl ms_decl;
-};
-
-bgfx::VertexDecl PosColorVertex::ms_decl;
+	 
  
 static const char* s_ptNames[]
 {
@@ -75,7 +57,7 @@ public:
 
 		m_width  = _width;
 		m_height = _height;
-		m_debug  = BGFX_DEBUG_NONE;
+		m_debug  = BGFX_DEBUG_PROFILER;
 		m_reset  = BGFX_RESET_VSYNC;
 
 		bgfx::Init init;
@@ -164,15 +146,15 @@ public:
 			 
 
 			float at[3]  = { 0.0f, 0.0f,   0.0f };
-			float eye[3] = { 0.0f, 0.0f, -35.0f };
-
+			float eye[3] = { 0.0f,  1000.0f,0.0f };
+			float up[3] = { 0.0f,  0.0f,-1000.0f };
 			// Set view and projection matrix for view 0.
 			{
 				float view[16];
-				bx::mtxLookAt(view, eye, at);
+				bx::mtxLookAt(view, eye, up);
 
 				float proj[16];
-				bx::mtxProj(proj, 60.0f, float(m_width)/float(m_height), 0.1f, 100.0f, bgfx::getCaps()->homogeneousDepth);
+				bx::mtxProj(proj, 120.0f, float(m_width)/float(m_height), 0.1f, 10000.0f, bgfx::getCaps()->homogeneousDepth);
 				bgfx::setViewTransform(0, view, proj);
 
 				// Set view 0 default viewport.
