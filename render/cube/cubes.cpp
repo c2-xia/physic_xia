@@ -16,6 +16,8 @@
 void RenderLoop(bgfx::ProgramHandle& m_program);
 extern std::list<IRenderAble> g_RenderAbles;
 bgfx::VertexDecl PosColorVertex::ms_decl;
+
+void mainInit();
 namespace
 {
 	 
@@ -78,7 +80,7 @@ public:
 			, 1.0f
 			, 0
 			);
-
+		mainInit();
 		// Create vertex stream declaration.
 		PosColorVertex::init();
 		m_program = loadProgram("vs_cubes", "fs_cubes");
@@ -115,6 +117,10 @@ public:
 				, uint16_t(m_width)
 				, uint16_t(m_height)
 				);
+			if (m_mouseState.m_buttons[entry::MouseButton::Left])
+			{
+
+			}
 
 			showExampleDialog(this);
 
@@ -176,7 +182,9 @@ public:
 		return false;
 	}
 
-	entry::MouseState m_mouseState;
+
+
+	static entry::MouseState m_mouseState;
 
 	uint32_t m_width;
 	uint32_t m_height;
@@ -190,7 +198,11 @@ public:
 	bool m_b;
 	bool m_a;
 };
+entry::MouseState ExampleCubes::m_mouseState;
 
-} // namespace
-
+} // namespace 
+const  entry::MouseState& getMouseState()
+{
+	return ExampleCubes::m_mouseState;
+}
 ENTRY_IMPLEMENT_MAIN(ExampleCubes, "01-cubes", "Rendering simple static mesh.");

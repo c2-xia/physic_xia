@@ -15,6 +15,7 @@ void IRenderAble::submit(bgfx::ProgramHandle& m_program,
 		| (m_b ? BGFX_STATE_WRITE_B : 0)
 		| (m_a ? BGFX_STATE_WRITE_A : 0)
 		| BGFX_STATE_WRITE_Z
+
 		| BGFX_STATE_DEPTH_TEST_LESS
 		| BGFX_STATE_CULL_CW
 		| BGFX_STATE_MSAA
