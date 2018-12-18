@@ -11,7 +11,7 @@ struct Plane
 	bool	 _bDirty;
 	void matrixR(real* pMatrix)
 	{
-		memset(pMatrix, 0, sizeof(real) * 16);
+		memset( pMatrix , 0, sizeof(real) * 16);
 		real temp[3][3];
 		memset(temp, 0, sizeof(temp));
 		fromToRotation(Vector3R::Up().getPtr(),_up.getPtr(), temp);

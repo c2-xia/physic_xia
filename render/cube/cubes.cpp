@@ -12,6 +12,7 @@
 #include "../NodeRender.h"
 #include "../NodePushHelper.h"
 #include <list>
+#include "../Camera.h"
 
 void RenderLoop(bgfx::ProgramHandle& m_program);
 extern std::list<IRenderAble> g_RenderAbles;
@@ -50,6 +51,7 @@ public:
 		, m_g(true)
 		, m_b(true)
 		, m_a(true)
+		, _camera(0)
 	{
 	}
 
@@ -80,6 +82,12 @@ public:
 			, 1.0f
 			, 0
 			);
+		 
+		_camera.eye[1] = -50.0f;
+		_camera.up[1] = 0;
+		_camera.up[2] = -100.0f;
+		_camera.at[1] = _camera.eye[1] +1;
+		 
 		mainInit();
 		// Create vertex stream declaration.
 		PosColorVertex::init();
@@ -151,18 +159,19 @@ public:
 
 			 
 
-			float at[3]  = { 0.0f, 0.0f,   0.0f };
+			/*float at[3]  = { 0.0f, 0.0f,   0.0f };
 			float eye[3] = { 0.0f,  1000.0f,0.0f };
-			float up[3] = { 0.0f,  0.0f,-1000.0f };
+			float up[3] = { 0.0f,  0.0f,-1000.0f };*/
 			// Set view and projection matrix for view 0.
 			{
-				float view[16];
+				/*float view[16];
 				bx::mtxLookAt(view, eye, up);
 
 				float proj[16];
 				bx::mtxProj(proj, 120.0f, float(m_width)/float(m_height), 0.1f, 10000.0f, bgfx::getCaps()->homogeneousDepth);
 				bgfx::setViewTransform(0, view, proj);
-
+*/
+				_camera.Set(float(m_width) / float(m_height));
 				// Set view 0 default viewport.
 				bgfx::setViewRect(0, 0, 0, uint16_t(m_width), uint16_t(m_height) );
 			}
@@ -193,6 +202,7 @@ public:
 	int64_t m_timeOffset;
 	int32_t m_pt;
 	bgfx::ProgramHandle m_program;
+	Camera _camera;
 	bool m_r;
 	bool m_g;
 	bool m_b;
@@ -201,8 +211,15 @@ public:
 entry::MouseState ExampleCubes::m_mouseState;
 
 } // namespace 
+
 const  entry::MouseState& getMouseState()
 {
 	return ExampleCubes::m_mouseState;
 }
+
 ENTRY_IMPLEMENT_MAIN(ExampleCubes, "01-cubes", "Rendering simple static mesh.");
+
+Camera& getCubesCamera()
+{
+	return s_ExampleCubesApp._camera;
+}

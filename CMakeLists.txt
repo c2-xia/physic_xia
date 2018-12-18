@@ -44,20 +44,19 @@ ADD_DEFINITIONS(
 -D_SCL_SECURE_NO_WARNINGS
 -D_CRT_SECURE_NO_WARNINGS
 -D_CRT_SECURE_NO_DEPRECATE
+ /Zi
 )
-#add_subdirectory (base)
-#include_directories ("${PROJECT_SOURCE_DIR}/cal")
-#add_subdirectory (cal)
-#include_directories ("${PROJECT_SOURCE_DIR}/render")
-#add_subdirectory (render)
+
+include_directories ("${PROJECT_SOURCE_DIR}/base")
+add_subdirectory (base)
+include_directories ("${PROJECT_SOURCE_DIR}/cal")
+add_subdirectory (cal)
+include_directories ("${PROJECT_SOURCE_DIR}/render")
+add_subdirectory (render)
+ 
 
 add_executable(physic_xia
-./base/Node.cpp
-./base/BoxNode.cpp
-./base/matrix.cpp
-./render/cube/cubes.cpp
-./render/NodeRender.cpp
-./render/NodePushHelper.cpp
 main.cpp
 )
+target_link_libraries(physic_xia render base cube)
  
