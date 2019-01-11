@@ -18,7 +18,7 @@ void RenderLoop(bgfx::ProgramHandle& m_program);
 extern std::list<IRenderAble> g_RenderAbles;
 bgfx::VertexDecl PosColorVertex::ms_decl;
 
-void mainInit();
+void mainInit(unsigned int width, unsigned int height);
 namespace
 {
 	 
@@ -82,13 +82,16 @@ public:
 			, 1.0f
 			, 0
 			);
-		 
-		_camera.eye[1] = -50.0f;
+		Vector3R eye(0,-50.0f,0);
+		Vector3R up(0,-100,0);
+		Vector3R at(0, eye[1]+1, 0);
+		_camera.space.initFromEye_At_Up(eye, at, up);
+	/*	_camera.eye[1] = -50.0f;
 		_camera.up[1] = 0;
 		_camera.up[2] = -100.0f;
-		_camera.at[1] = _camera.eye[1] +1;
+		_camera.at[1] = _camera.eye[1] +1;*/
 		 
-		mainInit();
+		mainInit(m_width, m_height);
 		// Create vertex stream declaration.
 		PosColorVertex::init();
 		m_program = loadProgram("vs_cubes", "fs_cubes");

@@ -2,6 +2,7 @@
 #include "render/NodePushHelper.h"
 #include <entry/input.h>
 #include "render/Camera.h"
+#include "runtime/GlobalValues.h"
 
 std::list<IRenderAble> g_RenderAbles;
 
@@ -11,15 +12,17 @@ Camera& getCubesCamera();
 Vector3R leftMousePosCash;
 bool leftMousePress = false;
 void LeftMouseDownEvent();
-void LeftMouseMoveEvent(Vector3R DertaPos);
+void LeftMouseMoveEvent(Vector3R start, Vector3R end);
 void LeftMouseUpEvent();
 
 
-void mainInit()
+void mainInit(unsigned int width,unsigned int height)
 {
-
-
+	GlobalValues::instance.width = width;
+	GlobalValues::instance.height = height;
 }
+
+
 bool onLeftMouse()
 { 
 	if (!leftMousePress)
@@ -41,7 +44,7 @@ void onLeftMouseMove()
 	
 	Vector3R dertaPos = nowPos - leftMousePosCash;
 
-	LeftMouseMoveEvent(dertaPos);
+	LeftMouseMoveEvent(leftMousePosCash,nowPos);
 	leftMousePosCash = nowPos;
 }
 
@@ -58,9 +61,9 @@ void LeftMouseDownEvent()
 	getCubesCamera().onMousePress();
 }
 
-void LeftMouseMoveEvent(Vector3R DertaPos)
+void LeftMouseMoveEvent(Vector3R start, Vector3R end)
 {
-	getCubesCamera().onMouseMove(DertaPos);
+	getCubesCamera().onMouseMove(start,end);
 }
 
 void LeftMouseUpEvent()
@@ -112,24 +115,7 @@ void processEvent()
 
 	}
 
-
-	/*static bool bPressed = false;
-	static Vector3R pos_cash;
-	if (getMouseState().m_buttons[entry::MouseButton::Enum::Left])
-	{
-		getCubesCamera().onMousePress();
-		if (!bPressed)
-			bPressed = true;
-		else
-		{
-			getCubesCamera().onMouseUp();
-		}
-	}
-	else if (bPressed == true)
-	{
-		getCubesCamera().onMouseMove();
-		bPressed = false;
-	}*/
+ 
 }
 void RenderLoop(bgfx::ProgramHandle& m_program)
 { 

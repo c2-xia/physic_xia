@@ -54,9 +54,12 @@ add_subdirectory (cal)
 include_directories ("${PROJECT_SOURCE_DIR}/render")
 add_subdirectory (render)
  
+include_directories ("${PROJECT_SOURCE_DIR}/runtime")
+add_subdirectory (runtime)
+
 
 add_executable(physic_xia
 main.cpp
 )
-target_link_libraries(physic_xia render base cube)
+target_link_libraries(physic_xia render base cube templeteStructImp runtime)
  

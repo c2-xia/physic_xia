@@ -1,4 +1,6 @@
 #include "base.h"
+#include "xia_math/xia_math.hpp"
+
 #include "BoxNode.h"
 
 void BOX_NODE::set(Vector3R bottom, Vector3R scale,unsigned char nDirection)
