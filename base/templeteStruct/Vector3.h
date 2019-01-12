@@ -87,6 +87,13 @@ struct Vector3
 		return temp;
 	}
 
+	friend static Vector3<T> operator * (const Vector3<T>& inV, const real s)
+	{
+		Vector3<T> temp(inV);
+		temp *= s;
+		return temp;
+	}
+
 	friend static Vector3<T> operator * (Vector3<T> l, Vector3<T> r)
 	{
 		/*

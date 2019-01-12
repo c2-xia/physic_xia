@@ -39,9 +39,54 @@ public:
 		m_rotatin *= rotate;
 	}
 
-	void RotateAround(Vector3R dic, real value)
+	void RotateAround(Vector3R axis, real euler)
 	{
+		axis.normalize();
+		QuaternionR q(axis.x, axis.y, axis.z, euler);
+		m_rotatin *= q;
+	}
 
+	void Y(Vector3R& out)
+	{
+		Matrix4x4R mtx;
+		toMatrix4_4(mtx);
+		out.x = mtx.Get(0, 1);
+		out.y = mtx.Get(1, 1);
+		out.z = mtx.Get(2, 1);
+	}
+	
+	void X(Vector3R& out)
+	{
+		Matrix4x4R mtx;
+		toMatrix4_4(mtx);
+		out.x = mtx.Get(0, 0);
+		out.y = mtx.Get(1, 0);
+		out.z = mtx.Get(2, 0);
+	}
+	
+	void Z(Vector3R& out)
+	{
+		Matrix4x4R mtx;
+		toMatrix4_4(mtx);
+		out.x = mtx.Get(0, 2);
+		out.y = mtx.Get(1, 2);
+		out.z = mtx.Get(2, 2);
+	}
+	void XYZ(Vector3R& X, Vector3R& Y, Vector3R& Z)
+	{
+		Matrix4x4R mtx;
+		toMatrix4_4(mtx);
+		X.x = mtx.Get(0, 0);
+		X.y = mtx.Get(1, 0);
+		X.z = mtx.Get(2, 0);
+
+		Y.x = mtx.Get(0, 1);
+		Y.y = mtx.Get(1, 1);
+		Y.z = mtx.Get(2, 1);
+
+		Z.x = mtx.Get(0, 2);
+		Z.y = mtx.Get(1, 2);
+		Z.z = mtx.Get(2, 2);
 	}
 private:
 	//该空间在世界坐标系中的位置

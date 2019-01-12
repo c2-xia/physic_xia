@@ -68,15 +68,13 @@ public:
 
 		if (p_x_start != p_x_end || p_y_start != p_y_end)
 		{
-			Vector3R a(p_x_start, p_y_start, this->fNear);
-			Vector3R b(p_x_end  , p_y_end  , this->fNear);
-			/*Vector3R a(0, 0,1);
-			Vector3R b(0.01,0.01, 1);*/
-			QuaternionR q = FromToQuaternionSafe(a, b);
-			/*Vector3R a(0.01f, 0, 0);
-			QuaternionR q = EulerToQuaternion(a);*/
-
-			space.rotate(q);
+			Vector3R eulers_x(0,0,0);
+			Vector3R eulers_y(0, 0, 0);
+			Vector3R eulers_z(0, 0, 0);
+			space.XYZ(eulers_x, eulers_y, eulers_z);
+			selfSpaceRotate(eulers_y * ( p_x_end - p_x_start ) * -10 );
+			 
+			selfSpaceRotate(eulers_x * ( p_y_end - p_y_start ) * -10 );
 		}
 		
 	}
