@@ -1,9 +1,11 @@
 #ifndef NODE_RENDER_H
 #define NODE_RENDER_H
 
-
+#include "../base/base.h"
+#include "../base/matrix.h"
 #include <bx/macros.h>
 #include "bgfx_utils.h"
+
 namespace entry
 {
 	class BX_NO_VTABLE AppI;
@@ -15,7 +17,7 @@ namespace entry
  
 struct IRenderAble
 {
-	float mtx[16];
+	Matrix4x4R mtx;
 	bgfx::VertexBufferHandle m_vbh;
 	bgfx::IndexBufferHandle ibh;
 	uint64_t   s_ptState;

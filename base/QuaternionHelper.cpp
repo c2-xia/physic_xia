@@ -41,7 +41,7 @@ void MatrixToQuaternion(const Matrix3x3R& kRot, QuaternionR& q)
 		*apkQuat[j] = (kRot.Get(j, i) + kRot.Get(i, j))*fRoot;
 		*apkQuat[k] = (kRot.Get(k, i) + kRot.Get(i, k))*fRoot;
 	}
-	q = Normalize(q);
+	//q = Normalize(q);
 }
 
 
@@ -62,23 +62,23 @@ void Quaternion2Maxtrix4_4(const QuaternionR& q, Matrix4x4R& m)
 
 	// Calculate 3x3 matrix from orthonormal basis
 	m.m_data[0][0] = 1.0f - (yy + zz);
-	m.m_data[0][1] = xy + wz;
-	m.m_data[0][2] = xz - wy;
-	m.m_data[0][3] = 0.0F;
-
-	m.m_data[1][0] = xy - wz;
-	m.m_data[1][1] = 1.0f - (xx + zz);
-	m.m_data[1][2] = yz + wx;
-	m.m_data[1][3] = 0.0F;
-
-	m.m_data[2][0] = xz + wy;
-	m.m_data[2][1] = yz - wx;
-	m.m_data[2][2] = 1.0f - (xx + yy);
-	m.m_data[2][3] = 0.0F;
-
+	m.m_data[1][0] = xy + wz;
+	m.m_data[2][0] = xz - wy;
 	m.m_data[3][0] = 0.0F;
+
+	m.m_data[0][1] = xy - wz;
+	m.m_data[1][1] = 1.0f - (xx + zz);
+	m.m_data[2][1] = yz + wx;
 	m.m_data[3][1] = 0.0F;
+
+	m.m_data[0][2] = xz + wy;
+	m.m_data[1][2] = yz - wx;
+	m.m_data[2][2] = 1.0f - (xx + yy);
 	m.m_data[3][2] = 0.0F;
+
+	m.m_data[0][3] = 0.0F;
+	m.m_data[1][3] = 0.0F;
+	m.m_data[2][3] = 0.0F;
 	m.m_data[3][3] = 1.0F;
 }
 

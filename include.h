@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "base/xia_math/xia_math.hpp"
 #include "base/base.h"
 #include "base/templeteStruct/templeteInclude.h"
 #include "render/NodeRender.h"

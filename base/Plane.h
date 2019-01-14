@@ -8,6 +8,8 @@ struct Plane
 	Plane():_bDirty(true){}
 	Vector3R _center;
 	Vector3R _up;
+
+	//render code 
 	bool	 _bDirty;
 	void matrixR(real* pMatrix)
 	{

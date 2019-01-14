@@ -3,75 +3,27 @@
 #include <entry/input.h>
 #include "render/Camera.h"
 #include "runtime/GlobalValues.h"
+#include "editor/Input.h"
+#include "editor/EventSystem.h"
+#include "editor/CameraEdit.h"
 
 std::list<IRenderAble> g_RenderAbles;
 
-const  entry::MouseState& getMouseState();
 Camera& getCubesCamera();
 
-Vector3R leftMousePosCash;
-bool leftMousePress = false;
-void LeftMouseDownEvent();
-void LeftMouseMoveEvent(Vector3R start, Vector3R end);
-void LeftMouseUpEvent();
+CameraEdit cameraEdit;
 
 
 void mainInit(unsigned int width,unsigned int height)
 {
-	GlobalValues::instance.width = width;
+	GlobalValues::instance.width  = width ;
 	GlobalValues::instance.height = height;
+
+	cameraEdit._pCamera = &getCubesCamera();
+	EventSystem::Instance.addRightMouseLisener(&cameraEdit);
+	EventSystem::Instance.addWheelListener(&cameraEdit);
+	 
 }
-
-
-bool onLeftMouse()
-{ 
-	if (!leftMousePress)
-	{
-		leftMousePress = true;
-		const  entry::MouseState& mState = getMouseState();
-		leftMousePosCash.Set((real)mState.m_mx, (real)mState.m_my, (real)mState.m_mz);
-
-		LeftMouseDownEvent();
-		return true;
-	}
-	return false;
-}
-
-void onLeftMouseMove()
-{
-	Vector3R nowPos; 
-	nowPos.Set((real)getMouseState().m_mx, (real)getMouseState().m_my, (real)getMouseState().m_mz);
-	
-	Vector3R dertaPos = nowPos - leftMousePosCash;
-
-	LeftMouseMoveEvent(leftMousePosCash,nowPos);
-	leftMousePosCash = nowPos;
-}
-
-void onLeftMouseUp()
-{
-	leftMousePress = false;
-
-	leftMousePosCash = Vector3R::Zero();
-	LeftMouseUpEvent();
-}
-
-void LeftMouseDownEvent()
-{
-	getCubesCamera().onMousePress();
-}
-
-void LeftMouseMoveEvent(Vector3R start, Vector3R end)
-{
-	getCubesCamera().onMouseMove(start,end);
-}
-
-void LeftMouseUpEvent()
-{
-	getCubesCamera().onMouseUp();
-}
-
-
 
 
 void pushRenders();
@@ -94,7 +46,8 @@ void pushRenders()
 	if (!b_init)
 	{
 		_plane._up.y = 1;
-		_boxNode.set({ 0.0f,0.0f,0.0f }, { 1.0f,1.0f,1.0f }, 1);
+		_boxNode._scale.Set(1, 1, 1);
+		_boxNode.set({ 0.0f,0.0f,0.0f }, 1);
 		b_init = true;
 	}
 	push(_plane);
@@ -103,19 +56,10 @@ void pushRenders()
 
 void processEvent()
 {
-	if (getMouseState().m_buttons[entry::MouseButton::Enum::Left] )
-	{
-		if ( ! onLeftMouse() )
-		{
-			onLeftMouseMove();
-		}
-	}
-	else
-	{
+	EventSystem::Instance.process();
 
-	}
 
- 
+	
 }
 void RenderLoop(bgfx::ProgramHandle& m_program)
 { 

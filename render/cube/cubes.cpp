@@ -82,9 +82,9 @@ public:
 			, 1.0f
 			, 0
 			);
-		Vector3R eye(0,-50.0f,0);
-		Vector3R up(0,-100,0);
-		Vector3R at(0, eye[1]+1, 0);
+		Vector3R eye(-100.0f , 100.0f, 0	);
+		Vector3R up (100.0f  , 100.0f, 0	);
+		Vector3R at (0		 , 0     , 0    );
 		_camera.space.initFromEye_At_Up(eye, at, up);
 	/*	_camera.eye[1] = -50.0f;
 		_camera.up[1] = 0;

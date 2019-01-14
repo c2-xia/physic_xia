@@ -16,6 +16,7 @@ public:
 	real m_data[4][4];
 	const real& Get(int row, int column) const { return m_data[row][column]; }
 	real& GetW(int row, int column) { return m_data[row][column]; }
+	real* getPtr() { return &m_data[0][0]; };
 };
 
 

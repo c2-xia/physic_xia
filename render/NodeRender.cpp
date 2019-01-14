@@ -1,3 +1,4 @@
+
 #include "NodeRender.h"
 
 #include "common.h"
@@ -21,7 +22,7 @@ void IRenderAble::submit(bgfx::ProgramHandle& m_program,
 		| BGFX_STATE_MSAA
 		| s_ptState
 		; 
-	bgfx::setTransform(mtx);
+	bgfx::setTransform(mtx.getPtr());
 	bgfx::setVertexBuffer(0, m_vbh);
 	bgfx::setIndexBuffer(ibh);
 

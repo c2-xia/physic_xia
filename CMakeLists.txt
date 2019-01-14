@@ -49,17 +49,17 @@ ADD_DEFINITIONS(
 
 include_directories ("${PROJECT_SOURCE_DIR}/base")
 add_subdirectory (base)
-include_directories ("${PROJECT_SOURCE_DIR}/cal")
-add_subdirectory (cal)
+
 include_directories ("${PROJECT_SOURCE_DIR}/render")
 add_subdirectory (render)
  
 include_directories ("${PROJECT_SOURCE_DIR}/runtime")
 add_subdirectory (runtime)
-
+include_directories ("${PROJECT_SOURCE_DIR}/editor")
+add_subdirectory (editor)
 
 add_executable(physic_xia
 main.cpp
 )
-target_link_libraries(physic_xia render base cube templeteStructImp runtime)
+target_link_libraries(physic_xia templeteStructImp base render cube  runtime editor)
  

@@ -7,4 +7,5 @@ add_library(base
 	Node.cpp
 	matrix.cpp
 	QuaternionHelper.cpp
+	SpaceRepresent.cpp
 )

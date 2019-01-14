@@ -3,4 +3,5 @@ add_subdirectory(cube)
 add_library(render
 	NodePushHelper.cpp
 	NodeRender.cpp
+Camera.cpp
 )

@@ -16,6 +16,6 @@ struct Vector2
 };
 
 typedef Vector2<float> Vector2f;
-typedef Vector2<real> Vector2f;
+typedef Vector2<real> Vector2R;
 #endif
 

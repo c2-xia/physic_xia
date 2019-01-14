@@ -59,6 +59,14 @@ struct Vector3
 		return *this;
 	}
 	
+	Vector3<T>& Vector3<T>::operator += (Vector3<T> v)
+	{
+		x += v.x;
+		y += v.y;
+		z += v.z;
+		return *this;
+	}
+
 	static const Vector3<T>& Up()
 	{
 		const static Vector3<T> up_instance(0, 1, 0);
@@ -103,10 +111,16 @@ struct Vector3
 		*/
 
 		T x = l.y*r.z - l.z*r.y;
-		T y = l.x*r.z - l.z*r.z;
+		T y = l.x*r.z - l.z*r.x;
 		T z = l.x*r.y - l.y*r.x;
 
-		return Vector3<T>(x, y, z);
+		return Vector3<T>(x, -y, z);
+	}
+
+	friend static T Dot (Vector3<T> l, Vector3<T> r)
+	{
+		return l.x * r.x + l.y * r.y + l.z * r.z;
+		 
 	}
 
 	static  const T 		epsilon ;

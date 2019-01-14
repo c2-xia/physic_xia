@@ -2,11 +2,11 @@
 #define NODE_H
  
 #include "templeteStruct/templeteInclude.h"
+#include "SpaceRepresent.h"
 
 struct Node
 {
-	Vector3R _pos;
-	QuaternionR _quat;
+	SpaceRepresent _space;
 };
 
 #endif
