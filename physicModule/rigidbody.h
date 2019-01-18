@@ -6,10 +6,6 @@ class Rigidbody
 {
 public:
 	real mass;
-	real friction;
-
-
-
 };
 
 
