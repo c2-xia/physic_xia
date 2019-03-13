@@ -5,6 +5,9 @@
 #include "QuaternionHelper.h"
 #include "SpaceRepresent.h"
  
+ 
+ 
+
 
 void SpaceRepresent::initFromEye_At_Up(Vector3R eye, Vector3R at, Vector3R up)
 {
@@ -30,8 +33,8 @@ void SpaceRepresent::initFromEye_At_Up(Vector3R eye, Vector3R at, Vector3R up)
 	mat.GetW(1, 2) = v_z[1];
 	mat.GetW(2, 2) = v_z[2];
 	MatrixToQuaternion(mat, m_rotatin);
-	Matrix4x4R test;
-	toMatrix4_4(test);
+	/*Matrix4x4R test;
+	toMatrix4_4(test);*/
 
 	float view[16];
 	bx::mtxLookAt(view, eye.getPtr(), at.getPtr(),up.getPtr());
@@ -49,8 +52,30 @@ void SpaceRepresent::toMatrix4_4(Matrix4x4R& out)
 	out.GetW(3, 0) = -Dot(m_postion, x_axis);
 	out.GetW(3, 1) = -Dot(m_postion, y_axis);
 	out.GetW(3, 2) = -Dot(m_postion, z_axis);
+
+
+	/*out.GetW(3, 0) = m_postion.x;
+	out.GetW(3, 1) = m_postion.y;
+	out.GetW(3, 2) = m_postion.z;*/
+	
 	out.GetW(3, 3) = 1;
 }
+
+void SpaceRepresent::fromMatrix4_4(const Matrix4x4R& in)
+{
+	MatrixToQuaternion(in, m_rotatin);
+
+	Vector3R x_axis(in.Get(0, 0), in.Get(1, 0), in.Get(2, 0));
+	Vector3R y_axis(in.Get(0, 1), in.Get(1, 1), in.Get(2, 1));
+	Vector3R z_axis(in.Get(0, 2), in.Get(1, 2), in.Get(2, 2));
+	
+	Vector3R x_l = x_axis * -in.Get(3, 0);
+	Vector3R y_l = y_axis * -in.Get(3, 1);
+	Vector3R z_l = z_axis * -in.Get(3, 2);
+
+	m_postion = x_l + y_l + z_l;
+}
+
 
 void SpaceRepresent::rotate(QuaternionR rotate)
 {
@@ -106,6 +131,4 @@ void SpaceRepresent::XYZ(Vector3R& X, Vector3R& Y, Vector3R& Z)
 	Z.y = mtx.Get(1, 2);
 	Z.z = mtx.Get(2, 2);
 }
- 
-
  

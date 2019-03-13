@@ -3,7 +3,7 @@
 
 
 extern std::list<IRenderAble> g_RenderAbles;
-static float PLANE_W = 20.0f;
+static float PLANE_W = 2.0f;
 static PosColorVertex PlaneVertexs[] =
 {
 	{ 0.0f	   ,  0.0f		 ,  0.0f		, 0xffffffff },
@@ -122,7 +122,7 @@ void push(Plane& plane)
 
 
 //box_node start
-float half_width = 10.0f;
+float half_width = 1.0f;
 static PosColorVertex BoxVertexs[] =
 {
 	{-half_width,  half_width,  half_width, 0xff000000 },
@@ -173,19 +173,35 @@ static const uint16_t s_BoxTriList[] =
 
 void push(BOX_NODE& box)
 {
-	if (box.getDirty())
+	IRenderAble& renderData = box.renderData;
+	renderData.s_ptState = BGFX_STATE_PT_TRISTRIP;//UINT64_C(0);
+	if (box._bMatrixDirty)
 	{
-		IRenderAble& renderData = box.renderData;
-		renderData.s_ptState = UINT64_C(0);
 		box.matrixR(renderData.mtx);
+		box._bMatrixDirty = false;
+	}
+		
+
+	if (box._bVertexDirty)
+	{
+		if (isValid(renderData.m_vbh))
+			destroy(renderData.m_vbh);
 		renderData.m_vbh = bgfx::createVertexBuffer(
 			bgfx::makeRef(BoxVertexs, sizeof(BoxVertexs))
 			, PosColorVertex::ms_decl
 		);
+		box._bVertexDirty = false;
+	}
+
+	if (box._bIndexDirty)
+	{
+		if (isValid(renderData.ibh))
+			destroy(renderData.ibh);
 		renderData.ibh = bgfx::createIndexBuffer(
 			bgfx::makeRef(s_BoxTriList, sizeof(s_BoxTriList))
 		);
-		box.setDirty(false);
+		box._bIndexDirty = false;
 	}
+	 
 	g_RenderAbles.push_back(box.renderData);
 }

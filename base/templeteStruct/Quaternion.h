@@ -50,6 +50,15 @@ public:
 		w *= aScalar;
 		return *this;
 	}
+	friend static QuaternionR	QuaternionR::operator * (QuaternionR& 	rhs, real aScalar)
+	{
+		QuaternionR re = rhs;
+		re.x = rhs.x * aScalar;
+		re.y = rhs.y * aScalar;
+		re.z = rhs.z * aScalar;
+		re.w = rhs.w * aScalar; 
+		return  re;
+	}
 	inline QuaternionR&	QuaternionR::operator *= (const QuaternionR& 	rhs)
 	{
 		real tempx = w * rhs.x + x * rhs.w + y * rhs.z - z * rhs.y;

@@ -1,6 +1,6 @@
 #include <math.h>
 #include "base.h"
-
+#include "stdafx.h"
 #include "matrix.h"
 
 
@@ -90,4 +90,15 @@ void fromToRotation(const real* from, const real* to, real* mtx)
 void fromToRotation(const real* from, const real* to, real mtx[3][3])
 {
 	fromToRotation(from,to, &mtx[0][0]);
+}
+
+void MultiplyMatrices4x4REF(const Matrix4x4R& __restrict lhs, const Matrix4x4R& __restrict rhs, Matrix4x4R& __restrict res)
+{  
+	for (int i = 0; i < 4; i++)
+	{
+		res.getPtr()[i] = lhs.getPtr()[i] * rhs.getPtr()[0] + lhs.getPtr()[i + 4] * rhs.getPtr()[1] + lhs.getPtr()[i + 8] * rhs.getPtr()[2] + lhs.getPtr()[i + 12] * rhs.getPtr()[3];
+		res.getPtr()[i + 4] = lhs.getPtr()[i] * rhs.getPtr()[4] + lhs.getPtr()[i + 4] * rhs.getPtr()[5] + lhs.getPtr()[i + 8] * rhs.getPtr()[6] + lhs.getPtr()[i + 12] * rhs.getPtr()[7];
+		res.getPtr()[i + 8] = lhs.getPtr()[i] * rhs.getPtr()[8] + lhs.getPtr()[i + 4] * rhs.getPtr()[9] + lhs.getPtr()[i + 8] * rhs.getPtr()[10] + lhs.getPtr()[i + 12] * rhs.getPtr()[11];
+		res.getPtr()[i + 12] = lhs.getPtr()[i] * rhs.getPtr()[12] + lhs.getPtr()[i + 4] * rhs.getPtr()[13] + lhs.getPtr()[i + 8] * rhs.getPtr()[14] + lhs.getPtr()[i + 12] * rhs.getPtr()[15];
+	}
 }

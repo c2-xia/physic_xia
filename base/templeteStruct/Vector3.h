@@ -88,6 +88,15 @@ struct Vector3
 		return Vector3<T>(x,y,z);
 	}
 	 
+	friend static Vector3<T> operator + (Vector3<T> l, Vector3<T> r)
+	{
+		T x = l.x + r.x;
+		T y = l.y + r.y;
+		T z = l.z + r.z;
+
+		return Vector3<T>(x, y, z);
+	}
+
 	friend static Vector3<T> operator / (const Vector3<T>& inV, const real s)
 	{
 		Vector3<T> temp(inV);

@@ -1,7 +1,11 @@
 
 void MatrixToQuaternion(const Matrix3x3R& kRot, QuaternionR& q);
 
+void MatrixToQuaternion(const Matrix4x4R& kRot, QuaternionR& q);
+
 void Quaternion2Maxtrix4_4(const QuaternionR& q, Matrix4x4R& m);
+
+Vector3R QuaternionToEuler(const QuaternionR& quat);
 
 QuaternionR EulerToQuaternion(const Vector3R& someEulerAngles);
 

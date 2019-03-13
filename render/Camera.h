@@ -24,9 +24,6 @@ public:
 	int _id;
 	float _wh_per;
 	float _fov;
-	
-	  
-
 };
 
 

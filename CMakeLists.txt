@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.1)
 set (CMAKE_CPP_STANDARD 15)
 set (CMAKE_C_STANDARD 15)
 set(CMAKE_CXX_FLAGS_RELEASE "/MT")
-set(CMAKE_CXX_FLAGS_DEBUG "/MTd")
+set(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od")
 project (physic_xia)
 
 include_directories ("${PROJECT_SOURCE_DIR}/base")
@@ -55,11 +55,24 @@ add_subdirectory (render)
  
 include_directories ("${PROJECT_SOURCE_DIR}/runtime")
 add_subdirectory (runtime)
+
 include_directories ("${PROJECT_SOURCE_DIR}/editor")
 add_subdirectory (editor)
+
+include_directories ("${PROJECT_SOURCE_DIR}/physicModule")
+add_subdirectory (physicModule)
 
 add_executable(physic_xia
 main.cpp
 )
-target_link_libraries(physic_xia templeteStructImp base render cube  runtime editor)
+target_link_libraries(physic_xia 
+templeteStructImp 
+base
+render
+cube  
+runtime 
+editor
+physicModule
+simulation
+)
  

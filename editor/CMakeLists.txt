@@ -3,4 +3,6 @@ add_library(editor
 	Input.cpp
 	EventSystem.cpp
 	CameraEdit.cpp
+	WorldDraw.cpp
+	EditorBoxCollider.cpp
 )

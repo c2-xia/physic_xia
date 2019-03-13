@@ -5,21 +5,25 @@
 
 struct BOX_NODE:public Node
 {
-	BOX_NODE() :_bDirty(true) {}
+	BOX_NODE() :_bMatrixDirty(true),
+		_bVertexDirty(true),
+		_bIndexDirty(true){}
 	Vector3R _scale;
 	/*
-	nDirection ：0表示x轴，1表示y轴,2表示轴
+	nDirection ：0表示x轴，1表示y轴,2表示z轴
 	*/
 	void set(Vector3R bottom,unsigned char nDirection=1);
 
 
 	//render code 
-	bool	 _bDirty;
+	bool	 _bMatrixDirty;
+	bool	 _bVertexDirty;
+	bool	 _bIndexDirty;
 	void matrixR(Matrix4x4R& pMatrix);
-	
-	void setDirty(bool bDirty) { _bDirty = bDirty; }
-	bool getDirty() { return _bDirty; };
+	 
+
 	struct IRenderAble renderData;
+
 };
 
 #endif

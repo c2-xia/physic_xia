@@ -17,6 +17,11 @@ namespace entry
  
 struct IRenderAble
 {
+	IRenderAble()
+	{
+		m_vbh.idx = bgfx::kInvalidHandle;
+		ibh.idx = bgfx::kInvalidHandle;
+	}
 	Matrix4x4R mtx;
 	bgfx::VertexBufferHandle m_vbh;
 	bgfx::IndexBufferHandle ibh;
