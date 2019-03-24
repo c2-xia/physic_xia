@@ -5,6 +5,8 @@ set(CMAKE_CXX_FLAGS_RELEASE "/MT")
 set(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od")
 project (physic_xia)
 
+source_group("Include" FILES ${CURRENT_HEADERS})
+
 include_directories ("${PROJECT_SOURCE_DIR}/base")
 include_directories ("${PROJECT_SOURCE_DIR}/../bgfx/include")
 include_directories ("${PROJECT_SOURCE_DIR}/../bimg/include")
@@ -65,14 +67,12 @@ add_subdirectory (physicModule)
 add_executable(physic_xia
 main.cpp
 )
-target_link_libraries(physic_xia 
-templeteStructImp 
+
+target_link_libraries(physic_xia  
 base
 render
-cube  
 runtime 
 editor
 physicModule
-simulation
 )
  
