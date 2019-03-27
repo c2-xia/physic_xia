@@ -24,13 +24,9 @@ void M_Simulation::process(real rDertaTime)
 			bhv_list.Push(new BHV_Node(*it));
 		}
 		BhvTree tree(bhv_list);
-
-
+		
 	}
 	
-
-
-
 	auto it = _rigidbodys.begin();
 	for (; it != _rigidbodys.end(); it++)
 	{

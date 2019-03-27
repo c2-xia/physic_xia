@@ -13,4 +13,9 @@ namespace xia_math
 		return tan(v);
 	}
 
+	inline float xia_abs(float v)
+	{
+		return abs(v);
+	}
+
 }

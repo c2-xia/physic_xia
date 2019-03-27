@@ -1,6 +1,18 @@
 
 
 
+struct InsertTestState
+{
+	enum Enum
+	{
+		eCross,
+		eContain,
+		eOut,
+		eInContain,//·´°üº¬
+		eInvalide
+	};	
+};
+
 
 struct BHV_Node
 {
@@ -10,7 +22,10 @@ struct BHV_Node
 
 	class Collider* _collider;
 	Vector3R center;
-	float    radius;
+	real    radius;
+	
+	InsertTestState::Enum getState(BHV_Node* other);
+	static BHV_Node* CalNewNode(BHV_Node* a, BHV_Node* b);
 	
 	BHV_Node* left,* right;
 
@@ -20,6 +35,8 @@ struct BHV_Node
 struct BhvTree
 {
 	BhvTree(struct BhvList& list);
+	~BhvTree();
+	void push(BHV_Node*);
 	BHV_Node* pRoot; 
 };
 struct BhvList
