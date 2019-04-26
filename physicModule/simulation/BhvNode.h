@@ -32,11 +32,27 @@ struct BHV_Node
 };
 
 
+
+struct contactForce
+{
+	Vector3R _force;
+	Rigidbody* rb;
+};
+
+
+struct contactForcePaire
+{
+	contactForce paire[2];
+};
+
 struct BhvTree
 {
 	BhvTree(struct BhvList& list);
 	~BhvTree();
 	void push(BHV_Node*);
+	
+	void getContactFroces(std::vector<contactForcePaire>& out);
+
 	BHV_Node* pRoot; 
 };
 struct BhvList

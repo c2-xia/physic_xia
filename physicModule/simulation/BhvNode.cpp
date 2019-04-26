@@ -258,3 +258,9 @@ void BhvTree::push(BHV_Node* node)
 		parentList = TempList;
 	}	
 }
+
+
+void BhvTree::getContactFroces(std::vector<contactForcePaire>& out)
+{
+
+}
