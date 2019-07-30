@@ -50,7 +50,7 @@ struct BhvTree
 	BhvTree(struct BhvList& list);
 	~BhvTree();
 	void push(BHV_Node*);
-	void pushold(BHV_Node*);
+	void pushOld(BHV_Node*);
 	void getContactFroces(std::vector<contactForcePaire>& out);
 
 	BHV_Node* pRoot; 
