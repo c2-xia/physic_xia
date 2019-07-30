@@ -6,14 +6,15 @@
 class Rigidbody
 {
 public:
+	Rigidbody();
 	real			mass;
 	SpaceRepresent  _space;
 	Vector3R		_speed;
 	Vector3R		_acceleratedSpeed;
 	Vector3R        _AngleSpeed;
 	Vector3R        _acceleratedAngleSpeed;
+	bool			_isLock;
 
-	//void addForce(Vector3R force, Vector3R point);
 	void addCollider(class Collider*);
 private:
 	std::list<class Collider*> _colliders;

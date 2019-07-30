@@ -3,6 +3,16 @@
 
 
 
+Rigidbody::Rigidbody()
+{
+	this->mass = 1;
+	this->_acceleratedAngleSpeed = Vector3R::Zero();
+	this->_acceleratedSpeed = Vector3R::Zero();
+	this->_AngleSpeed = Vector3R::Zero();
+	this->_isLock = false;
+	this->_speed = Vector3R::Zero();
+ 
+}
 
 void Rigidbody::addCollider(class Collider* collider)
 {

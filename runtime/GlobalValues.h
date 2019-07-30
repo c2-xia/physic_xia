@@ -6,7 +6,7 @@ class GlobalValues
 public:
 	unsigned int width;
 	unsigned int height;
-	
+	real G;
 	static GlobalValues instance;
 };
 

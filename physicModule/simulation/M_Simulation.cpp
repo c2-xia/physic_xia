@@ -5,7 +5,7 @@
 #include "BoxCollider.h"
 #include "../ColliderManager.h"
 #include "BhvNode.h"
-
+#include "../runtime/GlobalValues.h"
 #include "M_Simulation.h"
 
 
@@ -23,6 +23,7 @@ void M_Simulation::process(real rDertaTime)
 		{
 			bhv_list.Push(new BHV_Node(*it));
 		}
+
 		BhvTree tree(bhv_list);
 		std::vector<contactForcePaire> forces;
 		tree.getContactFroces(forces);
@@ -34,16 +35,20 @@ void M_Simulation::process(real rDertaTime)
 	{
 		Rigidbody* rb = (*it);
 		_STL_ASSERT(rb != NULL,"rb cant be null");
+		rb->_acceleratedSpeed = Vector3R(0,GlobalValues::instance.G,0);
 		rb->_speed += rb->_acceleratedSpeed*rDertaTime;
-		rb->_space.m_postion += rb->_speed*rDertaTime;
+		
+		
 		rb->_AngleSpeed += rb->_acceleratedAngleSpeed* rDertaTime;
 		Vector3R rotateAngle = rb->_AngleSpeed * rDertaTime * xia_math::Deg2Rad;
 		QuaternionR test =  EulerToQuaternion(rotateAngle);
-		 
-		rb->_space.m_rotatin =   rb->_space.m_rotatin*test;
-		 
-		rb->_space.m_rotatin = Normalize(rb->_space.m_rotatin);
-		 
+		if (!rb->_isLock)
+		{
+			rb->_space.m_postion += rb->_speed*rDertaTime;
+			rb->_space.m_rotatin = rb->_space.m_rotatin*test;
+
+			rb->_space.m_rotatin = Normalize(rb->_space.m_rotatin);
+		}		 
 		rb->_acceleratedSpeed = Vector3R::Zero();
 		rb->_acceleratedAngleSpeed = Vector3R::Zero();	
 	}

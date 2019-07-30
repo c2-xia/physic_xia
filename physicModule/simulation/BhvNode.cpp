@@ -96,7 +96,7 @@ BhvTree::BhvTree(BhvList& bhv_list):pRoot(NULL)
 	}
 	for (; it != bhv_list._list.end();it++)
 	{
-		push(*it);
+		pushOld(*it);
 	}	
 }
 
@@ -138,7 +138,14 @@ BHV_Node* getNewTree(BHV_Node* root, BHV_Node* left , BHV_Node* right)
 	return root;
 }
 
+
 void BhvTree::push(BHV_Node* node)
+{
+
+
+}
+
+void BhvTree::pushOld(BHV_Node* node)
 {
 	//如果有很多的碰撞体，每时每刻都在交叉，那其实构造bhv树一点意义都没有，
 	//这个时候应该构造一个稍微大一点点的包围盒，然后这些碰撞体共用一个包围盒

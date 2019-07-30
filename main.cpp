@@ -38,7 +38,7 @@ void mainInit(unsigned int width,unsigned int height)
 {
 	GlobalValues::instance.width  = width ;
 	GlobalValues::instance.height = height;
-
+	GlobalValues::instance.G = -9.8f;
 	cameraEdit._pCamera = &getCubesCamera();
 
 	EventSystem::Instance.addRightMouseLisener(&cameraEdit);
@@ -50,15 +50,16 @@ void mainInit(unsigned int width,unsigned int height)
 	vecBox[1]._boxCollider = (BoxCollider*)ColliderManager::Instance.Create(CollierType::Enum::BoxCollider);
 	rb[0].addCollider(vecBox[0]._boxCollider);
 	rb[1].addCollider(vecBox[1]._boxCollider);
-
+	rb[1]._isLock = true;
 	vecBox[0]._boxCollider->rb->_speed.Set(0, -1, 0);
+	vecBox[1]._boxCollider->rb->_speed.Set(0, -1, 0);
 	Vector3R rotateSpeed;
 	rotateSpeed.Set(0, 90, 0);
 	//vecBox[0]._boxCollider.rb->_AngleSpeed = rotateSpeed;
 	vecBox[0]._boxCollider->_size.Set(1, 1, 1);
-	vecBox[0]._boxCollider->_space.m_postion.Set(0, 0, 0);
+	vecBox[0]._boxCollider->_space.m_postion.Set(0, 2, 0);
 	vecBox[1]._boxCollider->_size.Set(1, 1, 1);
-	vecBox[1]._boxCollider->_space.m_postion.Set(0, 2, 0);
+	vecBox[1]._boxCollider->_space.m_postion.Set(0,0, 0);
 
 
 }
